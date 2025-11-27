@@ -2,22 +2,115 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Huffman File Compressor</title>
+  <title>Huffman Compression / Decompression</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>🗜️ Huffman Compressor (JS)</h1>
+  <div class="app">
+    <header class="app-header">
+      <div class="title-area">
+        <h1>Huffman Compression &amp; Decompression</h1>
+        <p>Interactive tool to compress and decompress text files using Huffman coding.</p>
+      </div>
+      <div class="badge">Java → Web Version</div>
+    </header>
 
-    <textarea id="inputText" placeholder="Paste your text here..." rows="8"></textarea>
-    
-    <div class="buttons">
-      <button onclick="compressText()">Compress</button>
-      <button onclick="decompressText()">Decompress</button>
-    </div>
+    <main class="app-main">
+      <!-- Compress Card -->
+      <section class="card card-compress">
+        <div class="card-header">
+          <h2>Compress Text File</h2>
+          <p>Select a <strong>.txt</strong> file and download a compressed <strong>.huff</strong> file.</p>
+        </div>
 
-    <h3>🧾 Output:</h3>
-    <textarea id="outputText" readonly rows="8"></textarea>
+        <div class="card-body">
+          <input type="file" id="compressInput" accept=".txt" hidden />
+          <button class="btn primary" id="chooseCompressFileBtn">
+            Choose .txt File
+          </button>
+
+          <div class="file-info" id="compressFileInfo">
+            No file selected.
+          </div>
+
+          <button class="btn accent" id="compressBtn" disabled>
+            🔐 Compress
+          </button>
+
+          <a id="compressDownloadLink" class="download-link hidden">Download compressed file</a>
+
+          <div class="stats" id="compressStats">
+            <h3>Compression Stats</h3>
+            <div class="stats-grid">
+              <div class="stat">
+                <span class="label">Original Size</span>
+                <span class="value" id="origSize">-</span>
+              </div>
+              <div class="stat">
+                <span class="label">Compressed Size</span>
+                <span class="value" id="compSize">-</span>
+              </div>
+              <div class="stat">
+                <span class="label">Compression Ratio</span>
+                <span class="value" id="compRatio">-</span>
+              </div>
+              <div class="stat">
+                <span class="label">Time Taken</span>
+                <span class="value" id="compTime">-</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Decompress Card -->
+      <section class="card card-decompress">
+        <div class="card-header">
+          <h2>Decompress .huff File</h2>
+          <p>Select a compressed file created by this tool and restore the original text.</p>
+        </div>
+
+        <div class="card-body">
+          <input type="file" id="decompressInput" accept=".huff" hidden />
+          <button class="btn primary" id="chooseDecompressFileBtn">
+            Choose .huff File
+          </button>
+
+          <div class="file-info" id="decompressFileInfo">
+            No file selected.
+          </div>
+
+          <button class="btn accent" id="decompressBtn" disabled>
+            🔓 Decompress
+          </button>
+
+          <a id="decompressDownloadLink" class="download-link hidden">Download decompressed file</a>
+
+          <div class="stats" id="decompressStats">
+            <h3>Decompression Stats</h3>
+            <div class="stats-grid">
+              <div class="stat">
+                <span class="label">Compressed Size</span>
+                <span class="value" id="decompCompSize">-</span>
+              </div>
+              <div class="stat">
+                <span class="label">Decompressed Size</span>
+                <span class="value" id="decompOrigSize">-</span>
+              </div>
+              <div class="stat">
+                <span class="label">Time Taken</span>
+                <span class="value" id="decompTime">-</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <section class="log-section">
+      <h2>Activity Log</h2>
+      <pre id="logArea" class="log"></pre>
+    </section>
   </div>
 
   <script src="script.js"></script>
